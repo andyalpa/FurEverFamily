@@ -4,7 +4,7 @@ import NavBar from "../components/NavBar/NavBar";
 
 const Home = () => {
   return (
-    <div className="dark:bg-content dark:text-white">
+    <div className="w-full h-full absolute bg-gradient-to-r from-blue-400 to-green-400">
       <NavBar />
       <header>
         <h1>Welcome to FurEverFamily</h1>

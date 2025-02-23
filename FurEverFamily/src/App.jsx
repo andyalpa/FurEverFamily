@@ -6,9 +6,11 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
-      <Home />
-    </>
+   <div className="w-full h-full absolute bg-gradiant-to-r from-blue-400 to-green-400">
+    <Home />
+   </div>
+      
+    
   )
 }
 
