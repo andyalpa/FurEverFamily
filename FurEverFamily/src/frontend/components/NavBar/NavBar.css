@@ -1,11 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Knewave&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Knewave&family=Pacifico&display=swap');
+
 @media (width >= 80rem /* 1280px */) {
     .bx {
         display: none !important;
     }
-}
-
-.navbar-logo {
-    /* ...existing styles... */
 }
 
 ul li {
@@ -17,4 +16,28 @@ ul li {
 ul li:hover {
     background-color: #38bdf8; /* Tailwind sky-400 */
     color: white;
+}
+
+
+/* Come back to this to fix the scrolling not sizing */
+.header {
+    container-type: scroll-state;
+    position: sticky;
+    top: 0px;
+
+    > nav {
+        transition: background .3s, color .3s;
+
+        @container scroll-state(stuck: top) {
+            background: rgb(255, 255, 255);
+            color: black;
+            height: 30px;
+        }
+    }
+}
+
+.header-title {
+    font-family: "Knewave", serif;
+    font-weight: 400;
+    font-style: normal;
 }

@@ -8,11 +8,11 @@ const NavBar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <nav className="flex justify-between items-center text-black py-6 px-8 md:px-32 bg-white drop-shadow-md">
+    <nav className="header flex justify-between items-center text-black py-6 px-8 md:px-32 bg-white drop-shadow-md">
       {/* <ThemeToggle /> */}
       <a href="#" className="navbar-logo flex items-center gap-2 font-bold text-2xl">
         <img src={Logo} className="w-13 p-0 hover:scale-105 transition-all" to="/" />
-        <span className="w-13 p-0 hover:scale-105 transition-all" to="/">FurEverFamily</span>
+        <span className="header-title w-13 text-gray-600 p-0 hover:scale-105 transition-all" to="/">FurEverFamily</span>
       </a>
       <ul className="hidden xl:flex items-center gap-12 font-semibold text-base">
         <li className="p-3 rounded-md transition-all cursor-pointer">

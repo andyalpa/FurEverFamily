@@ -1,13 +1,15 @@
 import React from "react";
 import "./Home.css";
 import NavBar from "../components/NavBar/NavBar";
+import Banner from "../../assets/Banner.png";
 
 const Home = () => {
   return (
-    <div className="w-full h-full absolute bg-gradient-to-r from-blue-400 to-green-400">
+    <div className="w-full h-full absolute bg-gradient-to-r from-blue-100 to-green-100">
       <NavBar />
-      <header>
-        <h1>Welcome to FurEverFamily</h1>
+      <header className="flex md:flex-row flex-col items-center justify-center gap-4 p-8">
+        <img src={Banner} alt="" className="flex-2/4 ..."/>
+        <h1 className="banner-title text-gray-700 flex-1 ...">Welcome to FurEverFamily</h1>
       </header>
       <main>
         <section>
