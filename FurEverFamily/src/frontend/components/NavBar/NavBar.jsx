@@ -3,17 +3,16 @@ import React from "react";
 // Replace div for Link when routing is implemented
 import "./NavBar.css";
 // import ThemeToggle from '../ThemeToggle';
-
+import Logo from "../../../assets/logo.png"
 const NavBar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
     <nav className="flex justify-between items-center text-black py-6 px-8 md:px-32 bg-white drop-shadow-md">
       {/* <ThemeToggle /> */}
-      <a href="#" className="navbar-logo">
-        <div className="w-52 hover:scale-105 transition-all" to="/">
-          FurEverFamily
-        </div>
+      <a href="#" className="navbar-logo flex items-center gap-2 font-bold text-2xl">
+        <img src={Logo} className="w-13 p-0 hover:scale-105 transition-all" to="/" />
+        <span className="w-13 p-0 hover:scale-105 transition-all" to="/">FurEverFamily</span>
       </a>
       <ul className="hidden xl:flex items-center gap-12 font-semibold text-base">
         <li className="p-3 rounded-md transition-all cursor-pointer">
