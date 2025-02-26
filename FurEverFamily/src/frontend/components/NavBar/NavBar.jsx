@@ -19,10 +19,13 @@ const NavBar = () => {
           <a href="/">Home</a>
         </li>
         <li className="p-3 rounded-md transition-all cursor-pointer">
-          <a href="/about">About</a>
+          <a href="/adopt">Adopt</a>
         </li>
         <li className="p-3 rounded-md transition-all cursor-pointer">
-          <a href="/services">Services</a>
+          <a href="/recipes">Recipes</a>
+        </li>
+        <li className="p-3 rounded-md transition-all cursor-pointer">
+          <a href="/about">About</a>
         </li>
         <li className="p-3 rounded-md transition-all cursor-pointer">
           <a href="/contact">Contact</a>
@@ -34,7 +37,7 @@ const NavBar = () => {
         <input
           type="text"
           placeholder="Search..."
-          className="py-2 pl-10 rounded-xl border-2 border-blue-300 focus:bg-slate-100 focus:outline-sky-500"
+          className="py-2 pl-10 rounded-xl border-2 border-orange-300 focus:bg-slate-100 focus:outline-orange-500"
         />
       </div>
 
@@ -49,17 +52,20 @@ const NavBar = () => {
         }`}
         style={{ transition: "transform 0.3s ease, opacity 0.3s ease" }}
       >
-        <a href="/" className="list-none w-full text-center p-4 hover:bg-sky-400 hover:text-white transition-all cursor-pointer">
+        <a href="/" className="list-none w-full text-center p-4 hover:bg-orange-400 hover:text-white transition-all cursor-pointer">
           Home
         </a>
-        <a href="/about" className="list-none w-full text-center p-4 hover:bg-sky-400 hover:text-white transition-all cursor-pointer">
-          About
+        <a href="/adopt" className="list-none w-full text-center p-4 hover:bg-orange-400 hover:text-white transition-all cursor-pointer">
+        Adopt
         </a>
-        <a href="/services" className="list-none w-full text-center p-4 hover:bg-sky-400 hover:text-white transition-all cursor-pointer">
-          Services
+        <a href="/recipes" className="list-none w-full text-center p-4 hover:bg-orange-400 hover:text-white transition-all cursor-pointer">
+        Recipes
         </a>
-        <a href="/contact" className="list-none w-full rounded-b-4xl text-center p-4 hover:bg-sky-400 hover:text-white transition-all cursor-pointer">
-          Contact
+        <a href="/about" className="list-none w-full rounded-b-4xl text-center p-4 hover:bg-orange-400 hover:text-white transition-all cursor-pointer">
+        About
+        </a>
+        <a href="/contact" className="list-none w-full rounded-b-4xl text-center p-4 hover:bg-orange-400 hover:text-white transition-all cursor-pointer">
+        Contact
         </a>
       </div>
     </nav>

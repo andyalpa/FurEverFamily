@@ -14,7 +14,7 @@ ul li {
 }
 
 ul li:hover {
-    background-color: #38bdf8; /* Tailwind sky-400 */
+    background-color: #f8733e; /* Tailwind sky-400 */
     color: white;
 }
 
