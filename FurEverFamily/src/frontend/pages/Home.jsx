@@ -29,7 +29,7 @@ const Home = () => {
 
           <div className="flex justify-center items-center gap-4 mt-2">
             <div>
-              <button class="py-2 px-4 bg-transparent text-orange-400 font-semibold border border-orange-400 rounded-3xl hover:bg-orange-400 hover:text-white hover:border-transparent transition ease-in duration-200 transform hover:-translate-y-1 active:translate-y-0">
+              <button class="py-2 px-4 bg-transparent text-orange-400 font-semibold border border-orange-400 rounded-3xl hover:bg-orange-100 hover:text-white hover:border-transparent transition ease-in duration-200 transform hover:-translate-y-1 active:translate-y-0">
                 Adopt Now
               </button>
             </div>

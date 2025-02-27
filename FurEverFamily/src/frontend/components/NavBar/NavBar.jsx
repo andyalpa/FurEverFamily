@@ -4,16 +4,25 @@ import React from "react";
 import "./NavBar.css";
 // import ThemeToggle from '../ThemeToggle';
 import Logo from "../../../assets/logo.png"
+import { useTheme } from "../../features/ThemeContext";
+
+
+
 const NavBar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   return (
-    <nav className="header flex justify-between items-center text-black py-6 px-8 md:px-32 bg-white drop-shadow-md">
+    <nav className={`header flex justify-between items-center ${theme === 'light' ? 'bg-white text-black' : 'bg-gray-800 text-white'} shadow-md py-6 px-8 md:px-32`}>
       {/* <ThemeToggle /> */}
       <a href="#" className="navbar-logo flex items-center gap-2 font-bold text-2xl">
         <img src={Logo} className="w-13 p-0 hover:scale-105 transition-all" to="/" />
-        <span className="header-title w-13 text-gray-600 p-0 hover:scale-105 transition-all" to="/">FurEverFamily</span>
+        <span className="header-title w-13 p-0 hover:scale-105 transition-all" to="/">FurEverFamily</span>
       </a>
+      <button onClick={toggleTheme} className="p-2 rounded bg-gray-200 dark:bg-gray-700">
+        {theme === 'light' ? 'Dark' : 'Light'}
+      </button>
+      
       <ul className="hidden xl:flex items-center gap-12 font-semibold text-base">
         <li className="p-3 rounded-md transition-all cursor-pointer">
           <a href="/">Home</a>
