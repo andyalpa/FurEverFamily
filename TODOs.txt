@@ -1,0 +1,6 @@
+Fix the authentication 
+Modify the NavBar with the new pages
+Add Login and SignUp Buttons
+Integrate APIs
+Fix NavBar not being display in all pages
+UI Improvments

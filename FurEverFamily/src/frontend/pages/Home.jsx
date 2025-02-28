@@ -4,6 +4,9 @@ import NavBar from "../components/NavBar/NavBar";
 import Banner from "../../assets/Banner.png";
 import Footer from "../components/Footer/Footer";
 import FeaturePets from "../components/FeaturePets/FeaturePets";
+import PetCard from "../components/PetCard/PetCard";
+import RecipeCard from "../components/RecipeCard/RecipeCard";
+import { featuredPets, featuredRecipes } from "../../frontend/Mock API/mockData.js";
 
 const Home = () => {
   return (
@@ -44,53 +47,40 @@ const Home = () => {
 
       <FeaturePets />
 
-      <main className="p-4 md:p-8">
-        <section className="mb-8">
-          <h2 className="text-xl md:text-3xl">About Us</h2>
-          <p className="text-base md:text-lg">
-            We are dedicated to finding forever homes for pets in need.
-          </p>
-        </section>
-        <section className="mb-8">
-          <h2 className="text-xl md:text-3xl">Adopt a Pet</h2>
-          <p className="text-base md:text-lg">
-            Check out our available pets for adoption.
-          </p>
-        </section>
-        <section className="mb-8">
-          <h2 className="text-xl md:text-3xl">Get Involved</h2>
-          <p className="text-base md:text-lg">
-            Learn how you can help us in our mission.
-          </p>
-        </section>
-      </main>
-      <footer className="p-4 md:p-8">
-        <p className="text-center text-sm md:text-base">
-          &copy; 2023 FurEverFamily. All rights reserved.
-        </p>
-      </footer>
-
-      <div className="bg-white dark:bg-gray-800 rounded-lg px-6 py-8 ring shadow-xl ring-gray-900/5">
-        <div>
-          <span className="inline-flex items-center justify-center rounded-md bg-indigo-500 p-2 shadow-lg">
-            <svg
-              className="h-6 w-6 stroke-white"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
-            </svg>
-          </span>
+      {/* Featured Pets */}
+      <section className="py-10">
+        <div className="container mx-auto">
+          <h2 className="text-3xl font-bold mb-6">Featured Pets</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {featuredPets.map(pet => (
+              <PetCard key={pet.id} {...pet} />
+            ))}
+          </div>
         </div>
-        <h3 className="text-gray-900 dark:text-white mt-5 text-base font-medium tracking-tight">
-          Writes upside-down
-        </h3>
-        <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm">
-          The Zero Gravity Pen can be used to write in any orientation,
-          including upside-down. It even works in outer space.
-        </p>
-      </div>
+      </section>
+
+      {/* Featured Recipes */}
+      <section className="py-10 bg-gray-200 dark:bg-gray-700">
+        <div className="container mx-auto">
+          <h2 className="text-3xl font-bold mb-6">Featured Recipes</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {featuredRecipes.map(recipe => (
+              <RecipeCard key={recipe.id} {...recipe} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Introduction */}
+      <section className="py-10">
+        <div className="container mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-4">About Us</h2>
+          <p className="text-lg mb-8">We are dedicated to helping pets find loving homes and providing resources for pet owners.</p>
+          <button className="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-600 transition-colors">Learn More</button>
+        </div>
+      </section>
+
+
 
       <Footer />
     </div>

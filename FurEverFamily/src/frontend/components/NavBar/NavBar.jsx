@@ -14,7 +14,7 @@ const NavBar = () => {
 
   return (
     <nav className={`header flex justify-between items-center ${theme === 'light' ? 'bg-white text-black' : 'bg-gray-800 text-white'} shadow-md py-6 px-8 md:px-32`}>
-      {/* <ThemeToggle /> */}
+      {/* <ThemeToggle, come back to edit it /> */}
       <a href="#" className="navbar-logo flex items-center gap-2 font-bold text-2xl">
         <img src={Logo} className="w-13 p-0 hover:scale-105 transition-all" to="/" />
         <span className="header-title w-13 p-0 hover:scale-105 transition-all" to="/">FurEverFamily</span>
