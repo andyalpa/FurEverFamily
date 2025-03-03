@@ -5,7 +5,7 @@ import { useAuth } from '../features/AuthContext';
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
   if (loading) return <div className="container mx-auto py-10">Loading...</div>;
-  if (!user) return <Navigate to="/login" />;
+  if (!user) return <Navigate to="/" />;
   return children;
 };
 

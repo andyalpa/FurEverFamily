@@ -9,7 +9,7 @@
 
 ul li {
     padding: 0.75rem; /* Adjust padding as needed */
-    border-radius: 0.375rem; /* Adjust border-radius as needed */
+    border-radius: 1rem; /* Adjust border-radius as needed */
     transition: all 0.3s ease;
 }
 
@@ -22,7 +22,8 @@ ul li:hover {
 /* Come back to this to fix the scrolling not sizing */
 .header {
     container-type: scroll-state;
-    position: sticky;
+    position: relative;
+  z-index: 60;
     top: 0px;
 
     > nav {
@@ -41,3 +42,8 @@ ul li:hover {
     font-weight: 400;
     font-style: normal;
 }
+
+.rounded-b-4xl {
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+  }
