@@ -7,7 +7,7 @@ const Header = () => {
 
   return (
     <div>
-      <header className="grid grid-cols-1 md:grid-cols-2 ">
+      <header className="grid grid-cols-1 pt-9 md:grid-cols-2 ">
         <div className={`mx-4 mt-4 overflow-hidden text-gray-700 shadow-xl bg-gradient-to-b ${theme === 'dark' ? 'from-gray-700 to-gray-900' : 'from-orange-100 to-green-100'} bg-clip-border rounded-xl h-96`}>
           <img
             src={Banner}

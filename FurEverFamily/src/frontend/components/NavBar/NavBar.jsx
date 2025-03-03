@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./NavBar.css";
 import Logo from "../../../assets/logo.png";
 import { useTheme } from "../../features/ThemeContext";
@@ -18,27 +18,35 @@ const NavBar = () => {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      navigate("/"); // Ensure this line navigates to the home page
+      navigate("/");
     } catch (error) {
       console.error("Error signing out: ", error);
     }
   };
 
   return (
-    <nav className={`header max-h-24 flex justify-between items-center ${theme === 'light' ? 'bg-white text-black' : 'bg-gray-800 text-white'} shadow-md py-6 px-8 md:px-32`}>
+    <nav
+      className={`header max-h-24 flex justify-between items-center ${
+        theme === "light" ? "bg-white text-black" : "bg-gray-800 text-white"
+      } shadow-md py-6 px-8 md:px-32`}
+    >
+      {/* Logo on the left */}
       <a href="/" className="navbar-logo flex items-center gap-2 font-bold text-2xl">
-        <img 
-          src={Logo} 
-          className={`w-13 p-0 hover:scale-105 transition-all ${theme === 'dark' ? 'filter invert' : ''}`} 
-          alt="Logo" 
+        <img
+          src={Logo}
+          className={`w-13 p-0 hover:scale-105 transition-all ${
+            theme === "dark" ? "filter invert" : ""
+          }`}
+          alt="Logo"
         />
-        <span className="header-title w-13 p-0 hover:scale-105 transition-all">FurEverFamily</span>
+        <span className="header-title w-13 p-0 hover:scale-105 transition-all">
+          FurEverFamily
+        </span>
       </a>
-      
+
+      {/* Navigation links in the middle (desktop only) */}
       <ul className="hidden xl:flex items-center gap-12 font-semibold text-base">
-        <li className="p-3 rounded-md transition-all cursor-pointer">
-          <a href="/">Home</a>
-        </li>
+        
         <li className="p-3 rounded-md transition-all cursor-pointer">
           <a href="/adopt">Adopt</a>
         </li>
@@ -53,10 +61,11 @@ const NavBar = () => {
         </li>
       </ul>
 
-      <div className="hidden xl:flex text-sm items-center gap-4">
+      {/* Right section (desktop only) */}
+      <div className="hidden xl:flex items-center gap-4">
         {user ? (
           <>
-            
+            <UserTab />
             <button
               onClick={handleLogout}
               className="p-2 text-base bg-red-400 text-gray-100 font-semibold transition-all leading-none border border-red-500 rounded-xl hover:border-transparent hover:bg-red-500"
@@ -66,59 +75,101 @@ const NavBar = () => {
           </>
         ) : (
           <>
-            <a className={`p-2 text-base ${theme === 'light' ? 'bg-white  text-orange-400' : 'bg-gray-800  text-orange-400 hover:text-orange-500 hover:border-gray-700 hover:bg-gray-700'} font-semibold transition-all leading-none  rounded-xl hover:border-transparent hover:bg-gray-100`} href="/signinpage">Login</a>
-            <a className="p-2 text-base bg-orange-400 text-gray-100 font-semibold transition-all leading-none border border-orange-500 rounded-xl hover:border-transparent hover:bg-orange-500" href="/signuppage">Sign up</a>
+            <a
+              className={`p-2 text-base ${
+                theme === "light"
+                  ? "bg-white text-orange-400"
+                  : "bg-gray-800 text-orange-400 hover:text-orange-500 hover:border-gray-700 hover:bg-gray-700"
+              } font-semibold transition-all leading-none rounded-xl hover:border-transparent hover:bg-gray-100`}
+              href="/signinpage"
+            >
+              Login
+            </a>
+            <a
+              className="p-2 text-base bg-orange-400 text-gray-100 font-semibold transition-all leading-none border border-orange-500 rounded-xl hover:border-transparent hover:bg-orange-500"
+              href="/signuppage"
+            >
+              Sign up
+            </a>
           </>
         )}
-        
+        <ThemeToggle />
       </div>
 
-      {user && <UserTab className="xl:hidden flex-shrink-0" />}
-      <i
-        className="bx bx-menu xl:hidden block text-5xl cursor-pointer"
-        onClick={() => setIsOpen(!isOpen)}
-      ></i>
-      <ThemeToggle className="xl:hidden flex-shrink-0" />
+      {/* Right section (mobile only) */}
+      <div className="flex items-center gap-4 xl:hidden">
+        {user && <UserTab className="flex-shrink-0" />}
+        <i
+          className="bx bx-menu text-5xl cursor-pointer"
+          onClick={() => setIsOpen(!isOpen)}
+        ></i>
+        <ThemeToggle className="flex-shrink-0" />
+      </div>
 
+      {/* Dropdown menu (mobile only) */}
       <div
-        className={`absolute xl:hidden top-24 left-0 w-full ${theme === 'light' ? 'bg-white' : 'bg-gray-800'} rounded-b-4xl flex flex-col items-center gap-6 font-semibold text-lg transform transition-transform ${
-          isOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"
+        className={`absolute xl:hidden top-24 left-0 w-full ${
+          theme === "light" ? "bg-white" : "bg-gray-800"
+        } rounded-b-4xl flex flex-col items-center gap-6 font-semibold text-lg transform transition-transform ${
+          isOpen
+            ? "translate-y-0 opacity-100"
+            : "-translate-y-full opacity-0 pointer-events-none"
         }`}
         style={{ transition: "transform 0.3s ease, opacity 0.3s ease" }}
       >
-        <a href="/" className="list-none w-full text-center p-4 hover:bg-orange-400 hover:text-white transition-all cursor-pointer">
-          Home
-        </a>
-        <a href="/adopt" className="list-none w-full text-center p-4 hover:bg-orange-400 hover:text-white transition-all cursor-pointer">
+        
+        <a
+          href="/adopt"
+          className="list-none w-full text-center p-4 hover:bg-orange-400 hover:text-white transition-all cursor-pointer"
+        >
           Adopt
         </a>
-        <a href="/recipes" className="list-none w-full text-center p-4 hover:bg-orange-400 hover:text-white transition-all cursor-pointer">
+        <a
+          href="/recipes"
+          className="list-none w-full text-center p-4 hover:bg-orange-400 hover:text-white transition-all cursor-pointer"
+        >
           Recipes
         </a>
-        <a href="/about" className="list-none w-full rounded-b-4xl text-center p-4 hover:bg-orange-400 hover:text-white transition-all cursor-pointer">
+        <a
+          href="/about"
+          className="list-none w-full text-center p-4 hover:bg-orange-400 hover:text-white transition-all cursor-pointer"
+        >
           About
         </a>
-        <a href="/contact" className="list-none w-full rounded-b-4xl text-center p-4 hover:bg-orange-400 hover:text-white transition-all cursor-pointer">
+        <a
+          href="/contact"
+          className="list-none w-full text-center p-4 hover:bg-orange-400 hover:text-white transition-all cursor-pointer"
+        >
           Contact
         </a>
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-4 mt-4 mb-4">
           {user ? (
-            <>
-             
-              <button
-                onClick={handleLogout}
-                className="p-2 bg-red-400 text-gray-100 font-semibold leading-none border border-red-500 rounded hover:border-transparent hover:bg-red-500"
-              >
-                Log out
-              </button>
-            </>
+            <button
+              onClick={handleLogout}
+              className="p-2 bg-red-400 text-gray-100 font-semibold leading-none border border-red-500 rounded hover:border-transparent hover:bg-red-500"
+            >
+              Log out
+            </button>
           ) : (
             <>
-              <a className={`p-2 text-base ${theme === 'light' ? 'bg-white  text-orange-400' : 'bg-gray-800  text-orange-400 hover:text-orange-500 hover:border-gray-700 hover:bg-gray-700'} font-semibold transition-all leading-none  rounded-xl hover:border-transparent hover:bg-gray-100`} href="/signinpage">Login</a>
-              <a className="p-2 text-base bg-orange-400 text-gray-100 font-semibold transition-all leading-none border border-orange-500 rounded-xl hover:border-transparent hover:bg-orange-500" href="/signuppage">Sign up</a>
+              <a
+                className={`p-2 text-base ${
+                  theme === "light"
+                    ? "bg-white text-orange-400"
+                    : "bg-gray-800 text-orange-400 hover:text-orange-500 hover:border-gray-700 hover:bg-gray-700"
+                } font-semibold transition-all leading-none rounded-xl hover:border-transparent hover:bg-gray-100`}
+                href="/signinpage"
+              >
+                Login
+              </a>
+              <a
+                className="p-2 text-base bg-orange-400 text-gray-100 font-semibold transition-all leading-none border border-orange-500 rounded-xl hover:border-transparent hover:bg-orange-500"
+                href="/signuppage"
+              >
+                Sign up
+              </a>
             </>
           )}
-          
         </div>
       </div>
     </nav>
