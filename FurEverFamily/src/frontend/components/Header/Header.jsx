@@ -7,15 +7,16 @@ const Header = () => {
 
   return (
     <div>
-      <header className="grid grid-cols-1 pt-9 md:grid-cols-2 ">
-        <div className={`mx-4 mt-4 overflow-hidden text-gray-700 shadow-xl bg-gradient-to-b ${theme === 'dark' ? 'from-gray-700 to-gray-900' : 'from-orange-100 to-green-100'} bg-clip-border rounded-xl h-96`}>
+      <header className={`grid grid-cols-1 pt-4  md:grid-cols-2 bg-gradient-to-b ${theme === 'dark' ? 'from-gray-700 to-gray-900' : 'from-orange-100 to-green-100'}`}>
+        <div className={`mx-4 mt-4 overflow-visible text-gray-700 bg-clip-border rounded-xl h-auto`}>
           <img
             src={Banner}
             alt="card-image"
-            className="object-cover w-full h-full "
+            className="object-cover w-full h-full"
+            style={{ height: '100%', width: '100%' }}
           />
         </div>
-        <div className="banner-text justify-center items-center text-center p-4 md:p-8">
+        <div className="banner-text content-center text-center p-4 md:p-8">
           <h1 className={`banner-title ${theme === 'dark' ? 'text-white' : 'text-gray-700'} flex-1 text-2xl md:text-5xl`}>
             Welcome to FurEverFamily
           </h1>

@@ -11,6 +11,7 @@ import { useTheme } from "../features/ThemeContext";
 
 const Home = () => {
   const { theme } = useTheme();
+  
 
   return (
     <div className={`w-full h-full absolute ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'}`}>

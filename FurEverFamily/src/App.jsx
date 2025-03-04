@@ -1,6 +1,6 @@
 import Home from './frontend/pages/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import PetAdoption from './frontend/pages/PetAdoption';
+import PetAdoption from './frontend/pages/PetAdoption/PetAdoption';
 import Footer from './frontend/components/Footer/Footer';
 import NavBar from './frontend/components/NavBar/NavBar';
 import Blog from './frontend/pages/Blog';

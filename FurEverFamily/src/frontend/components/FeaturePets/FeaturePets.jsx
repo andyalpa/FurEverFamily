@@ -1,120 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
+import PetCard from './../PetCard/PetCard';
+import { featuredPets as mockFeaturedPets } from '../../Mock API/mockData';
 
-const FeaturePets = () => {
+function FeaturePets() {
+  const [featuredPets, setFeaturedPets] = useState([]);
+
+  useEffect(() => {
+    const fetchFeaturedPets = async () => {
+      try {
+        // const response = await axios.get(
+        //   'https://api-staging.adoptapet.com/search/pet_search',
+        //   {
+        //     params: {
+        //       key: process.env.REACT_APP_API_KEY, // Store API key in .env
+        //       v: 3,
+        //       output: 'json',
+        //       city_or_zip: '47374', // Example zip code
+        //       geo_range: 50,
+        //       species: 'dog',
+        //       start_number: 1,
+        //       end_number: 6, // Limit to 6 featured pets
+        //     },
+        //   }
+        // );
+        // setFeaturedPets(response.data.pets || []);
+        setFeaturedPets(mockFeaturedPets); // Use mock data
+      } catch (error) {
+        console.error('Error fetching featured pets:', error);
+      }
+    };
+    fetchFeaturedPets();
+  }, []);
 
   return (
-    <div className="flex justify-center items-center min-h-screen gap-4">
-      <div class="flex justify-center items-center min-h-screen">
-        <div class="max-w-[720px] mx-auto">
-
-          <div class="flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-80">
-            <div class="mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-80">
-              <img
-                src="https://images.unsplash.com/photo-1629367494173-c78a56567877?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=927&amp;q=80"
-                alt="card-image"
-                class="object-cover w-full h-full"
-              />
-            </div>
-            <div class="p-6">
-              <div class="flex items-center justify-between mb-2">
-                <p class="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
-                  Pet Name
-                </p>
-                <p class="block font-sans text-base antialiased font-medium leading-relaxed text-orange-400">
-                  Location
-                </p>
-              </div>
-              <p class="block font-sans text-sm antialiased font-normal leading-normal text-gray-700 opacity-75">
-                Breed Information . Age
-              </p>
-            </div>
-            <div class="p-6 pt-0">
-              <button
-                class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg shadow-gray-900/10 hover:shadow-gray-900/20 focus:opacity-[0.85] active:opacity-[0.85] active:shadow-none block w-full bg-blue-gray-900/10 text-orange-400 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100"
-                type="button"
-              >
-                Learn More
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="flex justify-center items-center min-h-screen">
-        <div class="max-w-[720px] mx-auto">
-
-          <div class="flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-80">
-            <div class="mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-80">
-              <img
-                src="https://images.unsplash.com/photo-1629367494173-c78a56567877?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=927&amp;q=80"
-                alt="card-image"
-                class="object-cover w-full h-full"
-              />
-            </div>
-            <div class="p-6">
-              <div class="flex items-center justify-between mb-2">
-                <p class="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
-                  Pet Name
-                </p>
-                <p class="block font-sans text-base antialiased font-medium leading-relaxed text-orange-400">
-                  Location
-                </p>
-              </div>
-              <p class="block font-sans text-sm antialiased font-normal leading-normal text-gray-700 opacity-75">
-                Breed Information . Age
-              </p>
-            </div>
-            <div class="p-6 pt-0">
-              <button
-                class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg shadow-gray-900/10 hover:shadow-gray-900/20 focus:opacity-[0.85] active:opacity-[0.85] active:shadow-none block w-full bg-blue-gray-900/10 text-orange-400 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100"
-                type="button"
-              >
-                Learn More
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="flex justify-center items-center min-h-screen">
-        <div class="max-w-[720px] mx-auto">
-
-          <div class="flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-80">
-            <div class="mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-80">
-              <img
-                src="https://images.unsplash.com/photo-1629367494173-c78a56567877?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=927&amp;q=80"
-                alt="card-image"
-                class="object-cover w-full h-full"
-              />
-            </div>
-            <div class="p-6">
-              <div class="flex items-center justify-between mb-2">
-                <p class="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
-                  Pet Name
-                </p>
-                <p class="block font-sans text-base antialiased font-medium leading-relaxed text-orange-400">
-                  Location
-                </p>
-              </div>
-              <p class="block font-sans text-sm antialiased font-normal leading-normal text-gray-700 opacity-75">
-                Breed Information . Age
-              </p>
-            </div>
-            <div class="p-6 pt-0">
-              <button
-                class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg shadow-gray-900/10 hover:shadow-gray-900/20 focus:opacity-[0.85] active:opacity-[0.85] active:shadow-none block w-full bg-blue-gray-900/10 text-orange-400 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100"
-                type="button"
-              >
-                Learn More
-              </button>
-            </div>
-          </div>
-        </div>
+    <div className="container mx-auto py-8">
+      <h1 className="text-3xl font-bold mb-6 text-center">Featured Pets</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {featuredPets.map((pet) => (
+          <PetCard key={pet.pet_id} pet={pet} />
+        ))}
       </div>
     </div>
   );
-};
+}
 
 export default FeaturePets;
