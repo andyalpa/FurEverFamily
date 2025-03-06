@@ -1,175 +1,168 @@
-import React from "react";
-import "./NavBar.css";
-import Logo from "../../../assets/logo.png";
-import { useTheme } from "../../features/ThemeContext";
-import ThemeToggle from "../../features/ThemeToggle";
-import UserTab from "./UserTab";
-import { useAuth } from "../../features/AuthContext";
-import { signOut } from "firebase/auth";
-import { auth } from "../../features/firebase";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import UserTab from './UserTab';
+import { useTheme } from '../../features/ThemeContext';
+import ThemeToggle from '../../features/ThemeToggle';
+import './NavBar.css';
 
 const NavBar = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
   const { theme } = useTheme();
-  const { user } = useAuth();
-  const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      navigate("/");
-    } catch (error) {
-      console.error("Error signing out: ", error);
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location]);
+
+  const navLinks = [
+    { path: '/', label: 'Home' },
+    { path: '/adopt', label: 'Adopt' },
+    { path: '/recipes', label: 'Pet Recipes' },
+    { path: '/blog', label: 'Blog' },
+  ];
+
+  const isCurrentPath = (path) => {
+    if (path === '/') {
+      return location.pathname === '/';
     }
+    return location.pathname.startsWith(path);
   };
 
   return (
-    <nav
-      className={`header max-h-24 flex justify-between items-center ${
-        theme === "light" ? "bg-white text-black" : "bg-gray-800 text-white"
-      } shadow-md py-6 px-8 md:px-32`}
+    <nav 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled 
+          ? theme === 'dark'
+            ? 'bg-gray-900/95 backdrop-blur-sm shadow-lg shadow-black/10'
+            : 'bg-white/95 backdrop-blur-sm shadow-lg'
+          : ''
+      }`}
     >
-      {/* Logo on the left */}
-      <a href="/" className="navbar-logo flex items-center gap-2 font-bold text-2xl">
-        <img
-          src={Logo}
-          className={`w-13 p-0 hover:scale-105 transition-all ${
-            theme === "dark" ? "filter invert" : ""
-          }`}
-          alt="Logo"
-        />
-        <span className="header-title w-13 p-0 hover:scale-105 transition-all">
-          FurEverFamily
-        </span>
-      </a>
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <Link 
+            to="/" 
+            className="flex items-center gap-2"
+            data-aos="fade-right"
+          >
+            <img
+              src="/src/assets/logo.png"
+              alt="FurEver Family"
+              className="h-8 w-auto"
+            />
+            <span className={`text-xl font-heading font-bold ${
+              theme === 'dark' ? 'text-white' : 'text-text'
+            }`}>
+              FurEver Family
+            </span>
+          </Link>
 
-      {/* Navigation links in the middle (desktop only) */}
-      <ul className="hidden xl:flex items-center gap-12 font-semibold text-base">
-        
-        <li className="p-3 rounded-md transition-all cursor-pointer">
-          <a href="/adopt">Adopt</a>
-        </li>
-        <li className="p-3 rounded-md transition-all cursor-pointer">
-          <a href="/recipes">Recipes</a>
-        </li>
-        <li className="p-3 rounded-md transition-all cursor-pointer">
-          <a href="/about">About</a>
-        </li>
-        <li className="p-3 rounded-2xl transition-all cursor-pointer">
-          <a href="/contact">Contact</a>
-        </li>
-      </ul>
+          {/* Desktop Navigation */}
+          <div 
+            className="hidden md:flex items-center gap-8"
+            data-aos="fade-down"
+          >
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={`nav-link relative py-2 text-sm font-medium transition-colors ${
+                  isCurrentPath(link.path)
+                    ? theme === 'dark'
+                      ? 'text-primary'
+                      : 'text-primary'
+                    : theme === 'dark'
+                      ? 'text-gray-300 hover:text-white'
+                      : 'text-gray-600 hover:text-text'
+                }`}
+              >
+                {link.label}
+                {isCurrentPath(link.path) && (
+                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary transform origin-left"></span>
+                )}
+              </Link>
+            ))}
+          </div>
 
-      {/* Right section (desktop only) */}
-      <div className="hidden xl:flex items-center gap-4">
-        {user ? (
-          <>
+          {/* Right Section */}
+          <div 
+            className="flex items-center gap-4"
+            data-aos="fade-left"
+          >
+            <ThemeToggle />
             <UserTab />
+            
+            {/* Mobile Menu Button */}
             <button
-              onClick={handleLogout}
-              className="p-2 text-base bg-red-400 text-gray-100 font-semibold transition-all leading-none border border-red-500 rounded-xl hover:border-transparent hover:bg-red-500"
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden p-2 rounded-lg transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+              aria-label="Toggle mobile menu"
             >
-              Log out
-            </button>
-          </>
-        ) : (
-          <>
-            <a
-              className={`p-2 text-base ${
-                theme === "light"
-                  ? "bg-white text-orange-400"
-                  : "bg-gray-800 text-orange-400 hover:text-orange-500 hover:border-gray-700 hover:bg-gray-700"
-              } font-semibold transition-all leading-none rounded-xl hover:border-transparent hover:bg-gray-100`}
-              href="/signinpage"
-            >
-              Login
-            </a>
-            <a
-              className="p-2 text-base bg-orange-400 text-gray-100 font-semibold transition-all leading-none border border-orange-500 rounded-xl hover:border-transparent hover:bg-orange-500"
-              href="/signuppage"
-            >
-              Sign up
-            </a>
-          </>
-        )}
-        <ThemeToggle />
-      </div>
-
-      {/* Right section (mobile only) */}
-      <div className="flex items-center gap-4 xl:hidden">
-        {user && <UserTab className="flex-shrink-0" />}
-        <i
-          className="bx bx-menu text-5xl cursor-pointer"
-          onClick={() => setIsOpen(!isOpen)}
-        ></i>
-        <ThemeToggle className="flex-shrink-0" />
-      </div>
-
-      {/* Dropdown menu (mobile only) */}
-      <div
-        className={`absolute xl:hidden top-24 left-0 w-full ${
-          theme === "light" ? "bg-white" : "bg-gray-800"
-        } rounded-b-4xl flex flex-col items-center gap-6 font-semibold text-lg transform transition-transform ${
-          isOpen
-            ? "translate-y-0 opacity-100"
-            : "-translate-y-full opacity-0 pointer-events-none"
-        }`}
-        style={{ transition: "transform 0.3s ease, opacity 0.3s ease" }}
-      >
-        
-        <a
-          href="/adopt"
-          className="list-none w-full text-center p-4 hover:bg-orange-400 hover:text-white transition-all cursor-pointer"
-        >
-          Adopt
-        </a>
-        <a
-          href="/recipes"
-          className="list-none w-full text-center p-4 hover:bg-orange-400 hover:text-white transition-all cursor-pointer"
-        >
-          Recipes
-        </a>
-        <a
-          href="/about"
-          className="list-none w-full text-center p-4 hover:bg-orange-400 hover:text-white transition-all cursor-pointer"
-        >
-          About
-        </a>
-        <a
-          href="/contact"
-          className="list-none w-full text-center p-4 hover:bg-orange-400 hover:text-white transition-all cursor-pointer"
-        >
-          Contact
-        </a>
-        <div className="flex flex-col items-center gap-4 mt-4 mb-4">
-          {user ? (
-            <button
-              onClick={handleLogout}
-              className="p-2 bg-red-400 text-gray-100 font-semibold leading-none border border-red-500 rounded hover:border-transparent hover:bg-red-500"
-            >
-              Log out
-            </button>
-          ) : (
-            <>
-              <a
-                className={`p-2 text-base ${
-                  theme === "light"
-                    ? "bg-white text-orange-400"
-                    : "bg-gray-800 text-orange-400 hover:text-orange-500 hover:border-gray-700 hover:bg-gray-700"
-                } font-semibold transition-all leading-none rounded-xl hover:border-transparent hover:bg-gray-100`}
-                href="/signinpage"
+              <svg
+                className={`w-6 h-6 transition-transform duration-300 ${
+                  theme === 'dark' ? 'text-white' : 'text-text'
+                } ${isOpen ? 'rotate-90' : ''}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
               >
-                Login
-              </a>
-              <a
-                className="p-2 text-base bg-orange-400 text-gray-100 font-semibold transition-all leading-none border border-orange-500 rounded-xl hover:border-transparent hover:bg-orange-500"
-                href="/signuppage"
+                {isOpen ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                )}
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Navigation */}
+        <div
+          className={`md:hidden overflow-hidden transition-all duration-300 ${
+            isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+          <div className={`py-4 space-y-2 ${
+            theme === 'dark' ? 'bg-gray-900' : 'bg-white'
+          }`}>
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={`block px-4 py-2 text-sm transition-colors ${
+                  isCurrentPath(link.path)
+                    ? 'text-primary font-medium'
+                    : theme === 'dark'
+                      ? 'text-gray-300 hover:text-white'
+                      : 'text-gray-600 hover:text-text'
+                }`}
               >
-                Sign up
-              </a>
-            </>
-          )}
+                {link.label}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </nav>

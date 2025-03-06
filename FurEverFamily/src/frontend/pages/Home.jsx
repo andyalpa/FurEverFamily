@@ -23,7 +23,7 @@ const Home = () => {
           <h2 className={`text-3xl font-bold mb-6 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Featured Pets</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {featuredPets.map(pet => (
-              <PetCard key={pet.id} {...pet} />
+              <PetCard key={pet.pet_id} pet={pet} />
             ))}
           </div>
         </div>
@@ -34,7 +34,7 @@ const Home = () => {
           <h2 className={`text-3xl font-bold mb-6 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Featured Recipes</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {featuredRecipes.map(recipe => (
-              <RecipeCard key={recipe.id} {...recipe} />
+              <RecipeCard key={recipe.id} recipe={recipe} />
             ))}
           </div>
         </div>
