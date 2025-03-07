@@ -36,7 +36,7 @@ const UserTab = () => {
     return (
       <div className="flex items-center gap-4">
         <Link
-          to="/signin"
+          to="/signinpage"
           className={`text-sm font-medium hover:text-primary transition-colors ${
             theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
           }`}
@@ -44,7 +44,7 @@ const UserTab = () => {
           Sign In
         </Link>
         <Link
-          to="/signup"
+          to="/signuppage"
           className="btn-primary"
         >
           Sign Up

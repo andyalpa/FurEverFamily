@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../../features/firebase';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 function SignUpForm() {
   // State for form inputs
@@ -37,9 +37,9 @@ function SignUpForm() {
       <h2 className="text-center text-2xl font-bold tracking-wide text-gray-800">Sign Up</h2>
       <p className="text-center text-sm text-gray-600 mt-2">
         Already have an account?{' '}
-        <a href="/signinpage" className="text-blue-600 hover:text-blue-700 hover:underline" title="Sign In">
+        <Link to="/signinpage" className="text-blue-600 hover:text-blue-700 hover:underline">
           Sign in here
-        </a>
+        </Link>
       </p>
 
       {/* Form */}

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import UserTab from './UserTab';
 import { useTheme } from '../../features/ThemeContext';
-import ThemeToggle from '../../features/ThemeToggle';
 import './NavBar.css';
 
 const NavBar = () => {
@@ -101,7 +100,6 @@ const NavBar = () => {
             className="flex items-center gap-4"
             data-aos="fade-left"
           >
-            <ThemeToggle />
             <UserTab />
             
             {/* Mobile Menu Button */}

@@ -2,7 +2,6 @@ import React from "react";
 import "./Home.css";
 import NavBar from "../components/NavBar/NavBar.jsx";
 import Header from "../components/Header/Header.jsx";
-import Footer from "../components/Footer/Footer";
 import FeaturePets from "../components/FeaturePets/FeaturePets";
 import PetCard from "../components/PetCard/PetCard";
 import RecipeCard from "../components/RecipeCard/RecipeCard";
@@ -12,7 +11,6 @@ import { useTheme } from "../features/ThemeContext";
 const Home = () => {
   const { theme } = useTheme();
   
-
   return (
     <div className={`w-full h-full absolute ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'}`}>
       <Header />
@@ -47,7 +45,6 @@ const Home = () => {
           <button className="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-600 transition-colors">Learn More</button>
         </div>
       </section>
-      <Footer />
     </div>
   );
 };

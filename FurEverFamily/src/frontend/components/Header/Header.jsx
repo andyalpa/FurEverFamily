@@ -27,11 +27,11 @@ const Header = () => {
   }, []);
 
   return (
-    <header className={`relative min-h-[80vh] ${
+    <header className={`relative min-h-[80vh] isolate ${
       theme === 'dark' ? 'bg-gray-900' : 'bg-gray-50'
     }`}>
       {/* Background Image with Overlay */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 -z-10">
         <img
           src="/src/assets/Banner.jpeg"
           alt="Happy pets"
@@ -155,7 +155,7 @@ const Header = () => {
       </div>
 
       {/* Decorative Wave */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden">
+      <div className="absolute -bottom-1 left-0 w-full overflow-hidden">
         <svg
           className="relative block w-full h-[50px]"
           data-name="Layer 1"
