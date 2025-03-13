@@ -87,36 +87,48 @@ const SearchForm = () => {
   };
 
   return (
-    <div className={`rounded-xl shadow-lg ${
-      theme === 'dark' ? 'bg-gray-800' : 'bg-white'
-    }`}>
+    <div className={`overflow-hidden rounded-xl shadow-lg ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
       <div className="p-6">
         <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Search Header */}
+          <div className="mb-6">
+            <h2 className={`text-xl  font-heading font-semibold ${
+              theme === 'dark' ? 'text-white' : 'text-gray-900'
+            }`}>
+              Find Your Perfect Pet
+            </h2>
+            <p className={`mt-1 text-sm ${
+              theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+            }`}>
+              Use the filters below to find your new companion
+            </p>
+          </div>
+
           {/* Basic Search Fields */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="space-y-4">
             <div>
               <label 
                 htmlFor="type" 
-                className={`block text-sm font-medium mb-1 ${
+                className={`block text-sm font-medium mb-1.5 ${
                   theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
                 }`}
               >
-                Pet Type
+                I'm looking for a...
               </label>
               <select
                 id="type"
                 name="type"
                 value={formData.type}
                 onChange={handleInputChange}
-                className={`w-full rounded-lg px-4 py-2 border ${
+                className={`w-full rounded-lg px-4 py-2.5 border ${
                   theme === 'dark'
                     ? 'bg-gray-700 border-gray-600 text-white'
                     : 'bg-white border-gray-300 text-gray-900'
-                } focus:ring-2 focus:ring-primary`}
+                } focus:ring-2 focus:ring-primary transition-colors`}
               >
-                <option value="">Any Type</option>
-                <option value="dog">Dogs</option>
-                <option value="cat">Cats</option>
+                <option value="">Any Type of Pet</option>
+                <option value="dog">Dog</option>
+                <option value="cat">Cat</option>
                 <option value="other">Other Pets</option>
               </select>
             </div>
@@ -124,7 +136,7 @@ const SearchForm = () => {
             <div>
               <label 
                 htmlFor="breed" 
-                className={`block text-sm font-medium mb-1 ${
+                className={`block text-sm font-medium mb-1.5 ${
                   theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
                 }`}
               >
@@ -137,115 +149,108 @@ const SearchForm = () => {
                 value={formData.breed}
                 onChange={handleInputChange}
                 placeholder="Any breed"
-                className={`w-full rounded-lg px-4 py-2 border ${
+                className={`w-full rounded-lg px-4 py-2.5 border ${
                   theme === 'dark'
-                    ? 'bg-gray-700 border-gray-600 text-white'
-                    : 'bg-white border-gray-300 text-gray-900'
-                } focus:ring-2 focus:ring-primary`}
+                    ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-500'
+                    : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400'
+                } focus:ring-2 focus:ring-primary transition-colors`}
               />
             </div>
 
-            <div>
-              <label 
-                htmlFor="location" 
-                className={`block text-sm font-medium mb-1 ${
-                  theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-                }`}
-              >
-                Location
-              </label>
-              <input
-                type="text"
-                id="location"
-                name="location"
-                value={formData.location}
-                onChange={handleInputChange}
-                placeholder="City, State, or ZIP"
-                className={`w-full rounded-lg px-4 py-2 border ${
-                  theme === 'dark'
-                    ? 'bg-gray-700 border-gray-600 text-white'
-                    : 'bg-white border-gray-300 text-gray-900'
-                } focus:ring-2 focus:ring-primary`}
-              />
-            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label 
+                  htmlFor="location" 
+                  className={`block text-sm font-medium mb-1.5 ${
+                    theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                  }`}
+                >
+                  Location
+                </label>
+                <input
+                  type="text"
+                  id="location"
+                  name="location"
+                  value={formData.location}
+                  onChange={handleInputChange}
+                  placeholder="City or ZIP"
+                  className={`w-full rounded-lg px-4 py-2.5 border ${
+                    theme === 'dark'
+                      ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-500'
+                      : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400'
+                  } focus:ring-2 focus:ring-primary transition-colors`}
+                />
+              </div>
 
-            <div>
-              <label 
-                htmlFor="distance" 
-                className={`block text-sm font-medium mb-1 ${
-                  theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-                }`}
-              >
-                Distance
-              </label>
-              <select
-                id="distance"
-                name="distance"
-                value={formData.distance}
-                onChange={handleInputChange}
-                className={`w-full rounded-lg px-4 py-2 border ${
-                  theme === 'dark'
-                    ? 'bg-gray-700 border-gray-600 text-white'
-                    : 'bg-white border-gray-300 text-gray-900'
-                } focus:ring-2 focus:ring-primary`}
-              >
-                <option value="10">Within 10 miles</option>
-                <option value="25">Within 25 miles</option>
-                <option value="50">Within 50 miles</option>
-                <option value="100">Within 100 miles</option>
-                <option value="anywhere">Anywhere</option>
-              </select>
+              <div>
+                <label 
+                  htmlFor="distance" 
+                  className={`block text-sm font-medium mb-1.5 ${
+                    theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                  }`}
+                >
+                  Distance
+                </label>
+                <select
+                  id="distance"
+                  name="distance"
+                  value={formData.distance}
+                  onChange={handleInputChange}
+                  className={`w-full rounded-lg px-4 py-2.5 border ${
+                    theme === 'dark'
+                      ? 'bg-gray-700 border-gray-600 text-white'
+                      : 'bg-white border-gray-300 text-gray-900'
+                  } focus:ring-2 focus:ring-primary transition-colors`}
+                >
+                  <option value="10">10 miles</option>
+                  <option value="25">25 miles</option>
+                  <option value="50">50 miles</option>
+                  <option value="100">100 miles</option>
+                  <option value="anywhere">Any distance</option>
+                </select>
+              </div>
             </div>
           </div>
 
-          {/* Toggle Advanced Search */}
-          <div className="flex items-center justify-between">
-            <button
-              type="button"
-              onClick={() => setIsAdvancedOpen(!isAdvancedOpen)}
-              className={`flex items-center gap-2 text-sm font-medium ${
-                theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+          {/* Advanced Search Toggle */}
+          <button
+            type="button"
+            onClick={() => setIsAdvancedOpen(!isAdvancedOpen)}
+            className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg border ${
+              theme === 'dark' 
+                ? 'border-gray-700 hover:bg-gray-700' 
+                : 'border-gray-200 hover:bg-gray-50'
+            } transition-colors`}
+          >
+            <span className={`text-sm font-medium ${
+              theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+            }`}>
+              {isAdvancedOpen ? 'Less Filters' : 'More Filters'}
+            </span>
+            <svg 
+              className={`w-5 h-5 transition-transform ${
+                isAdvancedOpen ? 'rotate-180' : ''
+              } ${
+                theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
               }`}
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
             >
-              <svg 
-                className={`w-5 h-5 transition-transform ${isAdvancedOpen ? 'rotate-180' : ''}`}
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-              Advanced Search Options
-            </button>
-            <div className="flex items-center gap-4">
-              <button
-                type="button"
-                onClick={handleReset}
-                className={`text-sm font-medium ${
-                  theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-                } hover:text-primary transition-colors`}
-              >
-                Reset
-              </button>
-              <button
-                type="submit"
-                className="btn-primary"
-              >
-                Search Pets
-              </button>
-            </div>
-          </div>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
 
           {/* Advanced Search Fields */}
           {isAdvancedOpen && (
             <div className="pt-6 border-t dark:border-gray-700">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="space-y-6">
                 {/* Age, Size, Gender */}
-                <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label 
                       htmlFor="age" 
-                      className={`block text-sm font-medium mb-1 ${
+                      className={`block text-sm font-medium mb-1.5 ${
                         theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
                       }`}
                     >
@@ -256,11 +261,11 @@ const SearchForm = () => {
                       name="age"
                       value={formData.age}
                       onChange={handleInputChange}
-                      className={`w-full rounded-lg px-4 py-2 border ${
+                      className={`w-full rounded-lg px-4 py-2.5 border ${
                         theme === 'dark'
                           ? 'bg-gray-700 border-gray-600 text-white'
                           : 'bg-white border-gray-300 text-gray-900'
-                      } focus:ring-2 focus:ring-primary`}
+                      } focus:ring-2 focus:ring-primary transition-colors`}
                     >
                       <option value="">Any Age</option>
                       <option value="baby">Baby</option>
@@ -272,36 +277,8 @@ const SearchForm = () => {
 
                   <div>
                     <label 
-                      htmlFor="size" 
-                      className={`block text-sm font-medium mb-1 ${
-                        theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-                      }`}
-                    >
-                      Size
-                    </label>
-                    <select
-                      id="size"
-                      name="size"
-                      value={formData.size}
-                      onChange={handleInputChange}
-                      className={`w-full rounded-lg px-4 py-2 border ${
-                        theme === 'dark'
-                          ? 'bg-gray-700 border-gray-600 text-white'
-                          : 'bg-white border-gray-300 text-gray-900'
-                      } focus:ring-2 focus:ring-primary`}
-                    >
-                      <option value="">Any Size</option>
-                      <option value="small">Small</option>
-                      <option value="medium">Medium</option>
-                      <option value="large">Large</option>
-                      <option value="xlarge">Extra Large</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label 
                       htmlFor="gender" 
-                      className={`block text-sm font-medium mb-1 ${
+                      className={`block text-sm font-medium mb-1.5 ${
                         theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
                       }`}
                     >
@@ -312,11 +289,11 @@ const SearchForm = () => {
                       name="gender"
                       value={formData.gender}
                       onChange={handleInputChange}
-                      className={`w-full rounded-lg px-4 py-2 border ${
+                      className={`w-full rounded-lg px-4 py-2.5 border ${
                         theme === 'dark'
                           ? 'bg-gray-700 border-gray-600 text-white'
                           : 'bg-white border-gray-300 text-gray-900'
-                      } focus:ring-2 focus:ring-primary`}
+                      } focus:ring-2 focus:ring-primary transition-colors`}
                     >
                       <option value="">Any Gender</option>
                       <option value="male">Male</option>
@@ -332,7 +309,7 @@ const SearchForm = () => {
                   }`}>
                     Good With
                   </span>
-                  <div className="space-y-2">
+                  <div className="grid grid-cols-2 gap-3">
                     {['kids', 'dogs', 'cats', 'seniors'].map(option => (
                       <label 
                         key={option}
@@ -361,7 +338,7 @@ const SearchForm = () => {
                   }`}>
                     Health & Training
                   </span>
-                  <div className="space-y-2">
+                  <div className="grid grid-cols-2 gap-3">
                     <label 
                       className={`flex items-center gap-2 ${
                         theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
@@ -409,6 +386,27 @@ const SearchForm = () => {
               </div>
             </div>
           )}
+
+          {/* Action Buttons */}
+          <div className="flex items-center gap-4 pt-6">
+            <button
+              type="button"
+              onClick={handleReset}
+              className={`flex-1 px-4 py-2.5 rounded-lg border text-sm font-medium transition-colors ${
+                theme === 'dark'
+                  ? 'border-gray-700 text-gray-300 hover:bg-gray-700'
+                  : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+              }`}
+            >
+              Reset
+            </button>
+            <button
+              type="submit"
+              className="flex-1 px-4 py-2.5 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-dark transition-colors"
+            >
+              Search
+            </button>
+          </div>
         </form>
       </div>
     </div>

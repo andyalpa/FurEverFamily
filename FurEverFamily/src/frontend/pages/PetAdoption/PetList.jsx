@@ -9,14 +9,16 @@ function PetList({ pets }) {
   if (!pets.length) {
     return (
       <div 
-        className={`text-center py-16 ${
-          theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-        }`}
+        className={`flex flex-col items-center justify-center min-h-[400px] rounded-xl ${
+          theme === 'dark' ? 'bg-gray-800' : 'bg-white'
+        } shadow-sm`}
         data-aos="fade-up"
       >
-        <div className="w-24 h-24 mx-auto mb-6">
+        <div className="w-20 h-20 mb-6">
           <svg
-            className="w-full h-full"
+            className={`w-full h-full ${
+              theme === 'dark' ? 'text-gray-600' : 'text-gray-300'
+            }`}
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -24,16 +26,28 @@ function PetList({ pets }) {
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              strokeWidth={1.5}
+              d="M15.5 14.5c1.5 0 3-.5 4-1.5M18 10c.9-.9.9-2.1 0-3m-1.8-1.7c.3-.4.5-.8.5-1.3 0-1.1-.9-2-2-2s-2 .9-2 2c0 .5.2.9.5 1.3M15.5 14.5c-1.5 0-3-.5-4-1.5M6 10c-.9-.9-.9-2.1 0-3m1.8-1.7C7.5 4.9 7.3 4.5 7.3 4c0-1.1.9-2 2-2s2 .9 2 2c0 .5-.2.9-.5 1.3M8.5 14.5c1.5 0 3-.5 4-1.5m-4 1.5c-1.5 0-3-.5-4-1.5M12 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"
             />
           </svg>
         </div>
-        <h3 className="text-xl font-heading font-semibold mb-2">No pets found</h3>
-        <p className="mb-8">Try adjusting your search criteria</p>
+        <h3 className={`text-xl font-heading font-semibold mb-2 ${
+          theme === 'dark' ? 'text-white' : 'text-gray-900'
+        }`}>
+          No pets found
+        </h3>
+        <p className={`text-center max-w-sm mb-8 ${
+          theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+        }`}>
+          Try adjusting your search filters or browse our available pets
+        </p>
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="btn-ghost"
+          className={`px-6 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+            theme === 'dark'
+              ? 'bg-gray-700 text-white hover:bg-gray-600'
+              : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
+          }`}
         >
           Modify Search
         </button>
@@ -43,13 +57,15 @@ function PetList({ pets }) {
 
   return (
     <div className="space-y-8">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {pets.map((pet, index) => (
           <div
             key={pet.pet_id}
             data-aos="fade-up"
             data-aos-delay={index * 100}
-            className="transform hover:-translate-y-1 transition-transform duration-300"
+            className={`group relative rounded-xl overflow-hidden ${
+              theme === 'dark' ? 'bg-gray-800' : 'bg-white'
+            } shadow-sm hover:shadow-lg transition-all duration-300`}
           >
             <PetCard pet={pet} />
           </div>
@@ -58,15 +74,15 @@ function PetList({ pets }) {
 
       {pets.length > 6 && (
         <div 
-          className="text-center pt-8"
+          className="flex justify-center pt-8"
           data-aos="fade-up"
         >
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+            className={`inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-medium transition-colors ${
               theme === 'dark'
-                ? 'text-gray-400 hover:text-white hover:bg-gray-700'
-                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                ? 'bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white'
+                : 'bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900'
             }`}
           >
             <svg

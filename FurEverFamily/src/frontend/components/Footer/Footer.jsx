@@ -86,7 +86,7 @@ const Footer = () => {
             <img
               src="/src/assets/logo.png"
               alt="FurEver Family"
-              className="h-8 mb-6"
+              className={`h-8 mb-6 ${theme === 'dark' ? 'invert brightness-0' : ''}`}
             />
             <p className={`text-base mb-6 ${
               theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
