@@ -32,10 +32,33 @@ body {
 /* AOS animations */
 [data-aos] {
     pointer-events: none;
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
 }
 
 [data-aos].aos-animate {
     pointer-events: auto;
+}
+
+/* Theme transition handling */
+.theme-transition * {
+    transition: background-color 0.3s ease-in-out,
+                border-color 0.3s ease-in-out,
+                color 0.3s ease-in-out,
+                transform 0.3s ease-in-out,
+                opacity 0.3s ease-in-out !important;
+}
+
+/* Prevent animation flicker during theme change */
+.theme-transition [data-aos] {
+    transition: transform 0.3s ease-in-out,
+                opacity 0.3s ease-in-out !important;
+}
+
+/* Stop animations during resize */
+.resize-animation-stopper * {
+    animation: none !important;
+    transition: none !important;
 }
 
 /* Accessibility */
@@ -57,46 +80,46 @@ body {
 
 /* Theme transition management */
 .theme-transition * {
-  transition-property: background-color, border-color, color, fill, stroke;
-  transition-duration: 500ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-duration: 500ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Disable transitions on page load */
 .preload * {
-  transition: none !important;
+    transition: none !important;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+    width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--background);
+    background: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 5px;
+    background: var(--primary);
+    border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-dark);
+    background: var(--primary-dark);
 }
 
 /* Global focus styles */
 :focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
 }
 
 /* Button hover effects */
 .btn-primary,
 .btn-secondary,
 .btn-ghost {
-  position: relative;
-  overflow: hidden;
+    position: relative;
+    overflow: hidden;
 }
 
 .btn-primary::after,

@@ -30,10 +30,30 @@ export const ThemeProvider = ({ children }) => {
     // Add transition class temporarily
     document.documentElement.classList.add('theme-transition');
 
+    // Disable AOS animations during transition
+    if (window.AOS) {
+      document.querySelectorAll('[data-aos]').forEach(el => {
+        el.classList.add('aos-animate');
+      });
+    }
+
     // Remove transition class after animation completes
     const timeout = setTimeout(() => {
       document.documentElement.classList.remove('theme-transition');
       setIsTransitioning(false);
+      
+      // Re-enable and refresh AOS animations
+      if (window.AOS) {
+        window.AOS.refreshHard();
+        requestAnimationFrame(() => {
+          document.querySelectorAll('[data-aos]').forEach(el => {
+            el.classList.remove('aos-animate');
+            setTimeout(() => {
+              el.classList.add('aos-animate');
+            }, 10);
+          });
+        });
+      }
     }, 500);
 
     // Update meta theme-color
@@ -63,6 +83,11 @@ export const ThemeProvider = ({ children }) => {
 
   const toggleTheme = () => {
     if (!isTransitioning) {
+      // Force all AOS elements to stay visible during transition
+      document.querySelectorAll('[data-aos]').forEach(el => {
+        el.classList.add('aos-animate');
+      });
+      
       setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
     }
   };

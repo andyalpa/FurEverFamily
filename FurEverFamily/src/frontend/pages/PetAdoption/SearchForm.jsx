@@ -402,7 +402,11 @@ const SearchForm = () => {
             </button>
             <button
               type="submit"
-              className="flex-1 px-4 py-2.5 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-dark transition-colors"
+              className={`flex-1 px-4 py-2.5 rounded-lg bg-primary  text-sm font-medium hover:bg-primary-dark transition-colors ${
+                theme === 'dark'
+                 ? 'border-gray-700 text-gray-300 hover:bg-gray-700'
+                  : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+              }`}
             >
               Search
             </button>
